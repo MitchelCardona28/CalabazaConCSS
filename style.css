@@ -1,0 +1,98 @@
+:root {
+  --main-bg-color: #422261; 
+  --face: #422261;
+} /*De ésta forma se declaran variables globales en CSS*/
+
+* { /*Aplicando reglas para todo el documento HTML*/
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body { /*CSS flexbox para alinear nuestros objetos sin importar el tamaño de pantalla*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--main-bg-color); /*De esta manera se invoca una variable global en CSS*/
+}
+
+.pumpkin { /*Dibujando el primer ovalo central de la calabaza*/
+  position: relative;
+  height: 300px;
+  width: 170px;
+  background-color: #f8931f;
+  border-radius: 28% 72% 33% 67% / 21% 83% 17% 79%; /*border-radius para definir la base y altura del óvalo*/
+  transform: rotate(13deg); /*Propiedad que aplica rotación a un objeto*/
+  box-shadow: -40px 4px 0px -1px #fbb03b, -80px 5px 0px -2px #f8931f, 40px -15px 0px 0px #f87700, 80px -35px 0px -2px #f8931f; /*Con box-shadow podemos modificar la posición en X y Y con respecto al objeto original, el desenfoque, la escala y el color. Tambien sirve para crear una copia del objeto*/
+}
+
+.stem { /*Dibujando el tallo*/
+  position: relative;
+  bottom: 180px;
+  background-color: #8cc63e;
+  left: 210px;
+  z-index: -1; /*Profundidad de posición del objeto*/
+  width: 75px;
+  height: 150px;
+  transform: rotate(30deg);
+  border-radius: 58% 42% 69% 31% / 44% 100% 0% 56%;
+}
+
+.stem::before { /*Dibujando una capa para darle curvatura al tallo*/
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: var(--main-bg-color);
+  clip-path: circle(50% at 50% 50%); /*Propiedad para dibujar figuras geométricas*/
+}
+
+.face { /*Dibujando el ojo derecho*/
+  width: 75px;
+  height: 30px;
+  background-color: var(--face);
+  position: relative;
+  left: 60px;
+  bottom: 40px;
+  transform: rotate(10deg);
+  z-index: 1;
+  border-radius: 100% 0% 50% 50% / 0% 0% 100% 100%;
+ /* animation: ojos 2s infinite; /*Forma abreviada de asignar valores en animation: name duration iteration;*/
+}
+
+.face::after { /*Dibujando el ojo izquierdo*/
+  content: '';
+  position: absolute;
+  background-color: var(--face);
+  top: -21px;
+  left: 120px;
+  width: 75px;
+  height: 30px;
+  transform: rotate(-20deg);
+  border-radius: 100% 0% 50% 50% / 0% 0% 100% 100%;
+}
+
+.face::before { /*Dibujando la boca*/
+  content: '';
+  position: absolute;
+  top: 75px;
+  left: 15px;
+  background-color: var(--face);
+  transform: rotate(-10deg);
+  width: 200px;
+  height: 50px;
+  clip-path: polygon(0% 90%, 15% 16%, 21% 46%, 25% 8%, 38% 48%, 50% 17%, 65% 40%, 78% 14%, 89% 42%, 100% 11%, 94% 61%, 79% 98%, 66% 62%, 63% 94%, 53% 76%, 42% 100%, 31% 62%, 17% 96%, 14% 66%);
+  animation-name: dabadi; /*Reglas para aplicar de ésta forma animacion: name, duration, iteration*/
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes dabadi { /*Esta funcion permite automatizar la animacion ya sea en fotogramas(porcentajes:0% hasta 100%) o ubicación(From/To)*/
+  0% { transform: scale(1) rotate(-10deg);}
+  50% { transform: scale(1.1) rotate(10deg);}
+  100% { transform: scale(2) rotate(-20deg);}  
+}
+
